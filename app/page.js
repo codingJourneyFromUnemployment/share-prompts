@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import 'server-only'
 
 export default function Home() {
   return (
