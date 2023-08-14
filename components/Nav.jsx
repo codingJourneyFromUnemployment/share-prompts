@@ -59,17 +59,42 @@ const Nav = () => {
       {/* mobile navigation */}
       <div className="flex relative md:hidden">
 				{isUserLoggedIn ? (
-					<div className="flex flex-col space-y-3 items-center md:hidden">
-						<Image src="/assets/images/logo.svg" alt="Profile" width={37} height={37} className="rounded-full" onClick={() => setToggleDropdown(!toggleDropdown)} />
+					<div className="flex">
+						<Image 
+              src="/assets/images/logo.svg" 
+              alt="Profile" 
+              width={37} 
+              height={37} 
+              className="rounded-full" 
+              onClick={() => setToggleDropdown(!toggleDropdown)} 
+              />
+
 						{toggleDropdown && (
-							<div className="dropdwon">
+							<div className="dropdown">
 								<Link 
 									href="/profile" 
 									className="dropdown_link"
-									onClick={() => setToggleDropdown(!false)} 
+									onClick={() => setToggleDropdown(false)} 
 									>
 									My Profile
 								</Link>
+                <Link 
+									href="/create-prompt" 
+									className="dropdown_link"
+									onClick={() => setToggleDropdown(false)} 
+									>
+									Create Prompt
+								</Link>
+                <button 
+                  type="button"
+                  onClick={() => {
+                    setToggleDropdown(false)
+                    signOut()
+                  }}
+                  className="mt-5 w-full black_btn"
+                  >
+                  Sign Out
+                </button>
 							</div>
 						)}
 					</div>
