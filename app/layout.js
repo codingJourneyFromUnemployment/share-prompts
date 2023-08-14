@@ -1,4 +1,6 @@
 import '@styles/global.css'
+import Nav from '@components/Nav'
+import provider from '@components/Provider'
 
 export const metadata = {
   title: 'Share Prompts',
@@ -14,6 +16,7 @@ export default function RootLayout({ children }) {
         </div>
 
         <main className='app'>
+          <Nav />
           {children}
         </main>
       </body>
