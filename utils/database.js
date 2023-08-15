@@ -5,7 +5,7 @@ let isConnected = false;
 
 export const connectToAtlas = async () => {
   if (isConnected) {
-    console.log("MongoDB is already connected.".green);
+    console.log("MongoDB is already connected.".yellow);
     return;
   }
   try {
