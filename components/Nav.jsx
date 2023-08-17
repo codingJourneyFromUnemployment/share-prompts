@@ -6,15 +6,15 @@ import { useState, useEffect } from "react"
 import { signIn, signOut, useSession, getProviders } from "next-auth/react"
 
 const Nav = () => {
-  const isUserLoggedIn = true;
-  const [provider, setProvisers] = useState(null);
+  const { data: session, status } = useSession();
+  const [providers, setProviders] = useState(null);
 	const [toggleDropdown, setToggleDropdown] = useState(false);
   useEffect(() => {
-    const getProviders = async () => {
+    const fetchProviders = async () => {
       const response = await getProviders();
-      setProvisers(response);
+      setProviders(response);
     }
-    getProviders();
+    fetchProviders();
   }, [])
 
   return (
@@ -26,7 +26,7 @@ const Nav = () => {
 
       {/* navigation*/}
       <div className="hidden md:flex ">
-        {isUserLoggedIn ? (
+        {status === "authenticated" ? (
           <div className="flex flex-col space-y-3 md:flex-row md:space-x-5 md:space-y-0">
             <Link href="/create-promt" className="black_btn">
               Create Promt
@@ -37,13 +37,13 @@ const Nav = () => {
             </button>
 
             <Link href="/profile">
-              <Image src="/assets/images/logo.svg" alt="Profile" width={37} height={37} className="rounded-full"/>
+              <Image src={session?.user.image} alt="Profile" width={37} height={37} className="rounded-full"/>
             </Link>
           </div>
         ):(
           <>
-            {provider && 
-              Object.values(provider).map((provider) => (
+            {providers && 
+              Object.values(providers).map((provider) => (
                 <button 
                   type="button"
                   key={provider.name}
@@ -58,10 +58,10 @@ const Nav = () => {
 
       {/* mobile navigation */}
       <div className="flex relative md:hidden">
-				{isUserLoggedIn ? (
+        {status === "authenticated" ? (
 					<div className="flex">
 						<Image 
-              src="/assets/images/logo.svg" 
+              src={session?.user.image}
               alt="Profile" 
               width={37} 
               height={37} 
@@ -99,8 +99,8 @@ const Nav = () => {
 						)}
 					</div>
 				) : (<>
-					{provider &&
-						Object.values(provider).map((provider) => (
+					{providers &&
+						Object.values(providers).map((provider) => (
 							<button
 								type="button"
 								key={provider.name}
