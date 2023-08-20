@@ -66,6 +66,9 @@ const option = {
             email: profile.email,
             image: profile.picture
           });
+          console.log(newUser.username);
+          console.log(newUser.email);
+          console.log(newUser.image);
           await newUser.save();
         }
         return true;

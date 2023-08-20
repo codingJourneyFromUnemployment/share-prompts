@@ -28,8 +28,8 @@ const Nav = () => {
       <div className="hidden md:flex ">
         {status === "authenticated" ? (
           <div className="flex flex-col space-y-3 md:flex-row md:space-x-5 md:space-y-0">
-            <Link href="/create-promt" className="black_btn">
-              Create Promt
+            <Link href="/create-prompt" className="black_btn">
+              Create Prompt
             </Link>
 
             <button type="button" onClick={signOut} className="outline_btn">
