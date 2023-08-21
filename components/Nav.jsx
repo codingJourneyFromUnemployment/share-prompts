@@ -19,7 +19,7 @@ const Nav = () => {
 
   return (
     <nav className="flex justify-between w-full mb-16 pt-3 space-x-2">
-      <Link href="/" className="flex justify-center space-x-1">
+      <Link href="/" className="flex justify-center items-center space-x-1">
         <Image src="/assets/images/logo.svg" alt="Share Prompts Logo" width={30} height={30} className="object-contain"/>
         <p className="hidden md:align-middle md:logo_text md:block">Share Prompts</p>
       </Link>
