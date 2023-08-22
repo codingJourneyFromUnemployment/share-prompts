@@ -1,7 +1,13 @@
+import PromptCard from "@/components/PromptCard"
 
-const Profile = () => {
+
+function Profile({ name, desc, data ,handleEdit, handleDelete}) {
   return (
-    <div>Profile</div>
+    <section className="w-full">
+      <h1 className="head_text text-left">
+        {name} Profile
+      </h1>
+    </section>
   )
 }
 
