@@ -12,8 +12,8 @@ function MyProfile() {
   const [posts, setPosts] = useState([])
   const router = useRouter()
 
-  function handleEditor() {
-    
+  function handleEditor(post) {
+    router.push(`/update-prompt?id=${post._id}`)
   }
 
   async function handleDelete() {
