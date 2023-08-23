@@ -10,9 +10,10 @@ import Profile from '@components/Profile'
 function MyProfile() {
   const { data: session , status } = useSession()
   const [posts, setPosts] = useState([])
+  const router = useRouter()
 
   function handleEditor() {
-
+    
   }
 
   async function handleDelete() {

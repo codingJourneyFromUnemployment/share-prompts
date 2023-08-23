@@ -13,7 +13,7 @@ const promptSchema = new mongoose.Schema({
       type: String,
       required: [true, "Tag is required"],
     },
-  createdAt: {
+    createdAt: {
       type: Date,
       default: Date.now,
     }
