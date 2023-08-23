@@ -1,21 +1,34 @@
 'use client'
 import { useEffect, useState } from "react"
-import { useSession } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation"
 import Form from "@components/Form"
 import axios from "axios"
 
 function EditPrompt() {
-  const { data: session } = useSession()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const promptId = searchParams.get('id')
+
   const [submitting, setSubmitting] = useState(false)
   const [post, setPost] = useState({
     prompt: "",
     tag: "",
   })
 
-  useEffect(() => {
+  async function getPromptDetails() {
+    try {
+      const res = await axios.get(`/api/prompt/${promptId}`)
+      const _post = res.data
+      setPost(_post)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
+  useEffect(() => {
+    if (promptId) {
+      getPromptDetails()
+    }
   }, [promptId])
 
   async function createPost(e) {
@@ -48,4 +61,4 @@ function EditPrompt() {
   )
 }
 
-export default CreatePrompt
+export default EditPrompt

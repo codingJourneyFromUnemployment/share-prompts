@@ -14,7 +14,7 @@ export async function GET(request, { params }) {
     }
   } catch (error) {
     console.log(error);
-    return new Response("Failed to create prompt", { status: 500 });
+    return new Response("Failed to get prompt", { status: 500 });
   }
 }
 
@@ -47,7 +47,7 @@ export async function DELETE(request, { params }) {
     }
   } catch (error) {
     console.log(error);
-    return new Response("Failed to update prompt", { status: 500 });
+    return new Response("Failed to delete prompt", { status: 500 });
   }
 }
 

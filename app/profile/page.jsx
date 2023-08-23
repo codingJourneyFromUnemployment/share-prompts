@@ -12,8 +12,9 @@ function MyProfile() {
   const [posts, setPosts] = useState([])
   const router = useRouter()
 
-  function handleEditor(post) {
+  function handleEdit(post) {
     router.push(`/update-prompt?id=${post._id}`)
+    console.log(`post是: ${post}`)
   }
 
   async function handleDelete() {
@@ -41,7 +42,7 @@ function MyProfile() {
       name="My" 
       desc="Welcome to your personal profile page."
       data={posts}
-      handleEditor={handleEditor}
+      handleEdit={handleEdit}
       handleDelete={handleDelete}
     />
   )
