@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
 import axios from 'axios'
 
-const PromptCard = ({ post }) => {
+const PromptCard = ({ post, handleTagClick }) => {
   const [copied, setCopied] = useState("");
   const { data: session, status } = useSession()
   const pathname = usePathname()
@@ -68,7 +68,7 @@ const PromptCard = ({ post }) => {
       </p>
       <p 
         className='font-inter text-sm blue_gradient cursor-pointer'
-        onClick={() => handleTagClick && handleTagClick(post.tag)}
+        onClick={ () => handleTagClick(post) }
         >
         {post.tag}
       </p>

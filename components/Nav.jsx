@@ -13,12 +13,15 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { signIn, signOut, useSession, getProviders } from "next-auth/react"
 
 const Nav = () => {
   const { data: session, status } = useSession();
   const [providers, setProviders] = useState(null);
 	const [toggleDropdown, setToggleDropdown] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
     const fetchProviders = async () => {
       const response = await getProviders();
@@ -42,7 +45,14 @@ const Nav = () => {
               Create Prompt
             </Link>
 
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button 
+              type="button" 
+              onClick={() => {
+                    signOut()
+                    router.push("/")
+                  }} 
+              className="outline_btn"
+              >
               Sign Out
             </button>
 
@@ -100,6 +110,7 @@ const Nav = () => {
                   onClick={() => {
                     setToggleDropdown(false)
                     signOut()
+                    router.push("/")
                   }}
                   className="mt-5 w-full black_btn"
                   >

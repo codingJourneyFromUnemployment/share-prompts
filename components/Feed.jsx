@@ -29,15 +29,21 @@ function Feed() {
     e.preventDefault()
     try{
       const res = await axios.post('/api/prompt/search', { searchText })
-      const _posts = res.data
+      const _posts = res.data.prompts
       setPosts(_posts)
     } catch (err) {
       console.log(err)
     }
   }
 
-  function tagClick(tag) {
-    
+  async function handleTagClick(post) {
+    try{
+      const res = await axios.get(`/api/prompt/search/${encodeURIComponent(post.tag)}`)
+      const _posts = res.data.prompts
+      setPosts(_posts)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   async function fetchPosts() {
@@ -73,7 +79,7 @@ function Feed() {
 
       <PromptCardList 
         data={posts}
-        handleTagClick={ tagClick }
+        handleTagClick={handleTagClick}
         />
     </section>
   )

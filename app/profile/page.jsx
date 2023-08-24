@@ -28,11 +28,22 @@ function MyProfile() {
     }
   }, [])
 
+  async function handleTagClick(post) {
+    try{
+      const res = await axios.get(`/api/prompt/search/${encodeURIComponent(post.tag)}`)
+      const _posts = res.data.prompts
+      setPosts(_posts)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <Profile
       name="My" 
       desc="Welcome to your personal profile page."
       data={posts}
+      handleTagClick={handleTagClick}
     />
   )
 }
