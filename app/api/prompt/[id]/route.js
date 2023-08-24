@@ -21,12 +21,14 @@ export async function GET(request, { params }) {
 // PATCH (update)
 export async function PATCH(request, { params }) {
   try {
-    const { prompt, tag } = request.json();
+    const { prompt, tag } = await request.json();
     const exsitingPrompt = await Prompt.findById(params.id);
     if (!exsitingPrompt) {
       return NextResponse.json("Prompt not found", { status: 404 });
     } else {
-      await Prompt.updateOne({ _id: params.id }, { prompt }, { tag });
+      exsitingPrompt.prompt = prompt;
+      exsitingPrompt.tag = tag;
+      await exsitingPrompt.save();
       return NextResponse.json("update successful", { status: 200 });
     }
   } catch (error) {

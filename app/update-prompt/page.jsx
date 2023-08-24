@@ -18,7 +18,7 @@ function EditPrompt() {
   async function getPromptDetails() {
     try {
       const res = await axios.get(`/api/prompt/${promptId}`)
-      const _post = res.data
+      const _post = res.data.prompt
       setPost(_post)
     } catch (error) {
       console.log(error)
@@ -31,13 +31,16 @@ function EditPrompt() {
     }
   }, [promptId])
 
-  async function createPost(e) {
+  async function updatePost(e) {
     e.preventDefault();
     setSubmitting(true);
+    if(!promptId) {
+      alert('Prompt ID not found')
+      return
+    }
     try {
-      const res = await axios.post('/api/prompt/new', {
+      const res = await axios.patch(`/api/prompt/${promptId}`, {
         prompt: post.prompt,
-        userId: session?.user.id,
         tag: post.tag,
       })
       if (res.status === 200) {
@@ -52,13 +55,14 @@ function EditPrompt() {
 
   return (
     <Form
-      type="Create"
+      type="Edit"
       post={post}
       setPost={setPost}
       submitting={submitting}
-      handleSubmit={createPost}
+      handleSubmit={updatePost}
     />
   )
 }
 
 export default EditPrompt
+

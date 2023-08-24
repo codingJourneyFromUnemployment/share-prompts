@@ -4,11 +4,19 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
 
-const PromptCard = ({post, handleTagClick, handleEdit, handleDelete}) => {
+const PromptCard = ({ post }) => {
   const [copied, setCopied] = useState("");
   const { data: session, status } = useSession()
   const pathname = usePathname()
   const router = useRouter()
+
+  function handleEdit() {
+    router.push(`/update-prompt?id=${post._id}`)
+  }
+
+  async function handleDelete() {
+
+  }
 
   async function handleCopyBtn() {
     setCopied(post.prompt)

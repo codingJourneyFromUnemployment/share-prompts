@@ -12,15 +12,6 @@ function MyProfile() {
   const [posts, setPosts] = useState([])
   const router = useRouter()
 
-  function handleEdit(post) {
-    router.push(`/update-prompt?id=${post._id}`)
-    console.log(`post是: ${post}`)
-  }
-
-  async function handleDelete() {
-
-  }
-
   async function fetchPosts() {
     try {
       const res = await axios.get(`/api/users/${session.user.id}/posts`)
@@ -42,8 +33,6 @@ function MyProfile() {
       name="My" 
       desc="Welcome to your personal profile page."
       data={posts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
     />
   )
 }

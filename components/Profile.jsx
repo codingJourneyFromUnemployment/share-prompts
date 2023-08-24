@@ -1,22 +1,20 @@
 import PromptCard from "@/components/PromptCard"
 
 
-export function PromptCardList({ data, handleEdit, handleDelete }) {
+export function PromptCardList({ data }) {
   return (
     <div className="mt-10 prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
         />
       ))}
     </div>
   )
 }
 
-function Profile({ name, desc, data ,handleEdit, handleDelete}) {
+function Profile({ name, desc, data }) {
   return (
     <section className="w-full">
       <h1 className="head_text text-left">
@@ -30,8 +28,6 @@ function Profile({ name, desc, data ,handleEdit, handleDelete}) {
 
       <PromptCardList 
         data={data}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
         />
     </section>
   )
