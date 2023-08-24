@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
+import axios from 'axios'
 
 const PromptCard = ({ post }) => {
   const [copied, setCopied] = useState("");
@@ -15,7 +16,17 @@ const PromptCard = ({ post }) => {
   }
 
   async function handleDelete() {
-
+    const hasConfirmed = confirm('Are you sure you want to delete this prompt?')
+    if (hasConfirmed) {
+      try {
+        const res = await axios.delete(`/api/prompt/${post._id}`)
+        if (res.status === 200) {
+          router.push('/')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   async function handleCopyBtn() {
